@@ -72,14 +72,8 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt }}
-        # We include both here, because Qt 6.2+ currently needs the 'addons' prefix, while
-        # earlier versions don't, and aqtinstall does not currently break on unknown modules.
-        # Note, this 'addons' prefix issue has been fixed already in aqtinstall v2.0, but
-        # install-qt-action is not compatible with aqtinstall v2 untill install-qt-action v3,
-        # which is close, but not yet released. \todo Clean this up when v3 is released.
-        # See https://github.com/miurahr/aqtinstall/issues/333 and
-        # https://github.com/jurplel/install-qt-action/issues/95
-        modules: qtconnectivity addons.qtconnectivity
+        modules: qtconnectivity
+        aqtversion: '>=2'
     - name: Build
       env:
         CC:  ${{ matrix.env.cc }}
@@ -155,14 +149,8 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt }}
-        # We include both here, because Qt 6.2+ currently needs the 'addons' prefix, while
-        # earlier versions don't, and aqtinstall does not currently break on unknown modules.
-        # Note, this 'addons' prefix issue has been fixed already in aqtinstall v2.0, but
-        # install-qt-action is not compatible with aqtinstall v2 untill install-qt-action v3,
-        # which is close, but not yet released. \todo Clean this up when v3 is released.
-        # See https://github.com/miurahr/aqtinstall/issues/333 and
-        # https://github.com/jurplel/install-qt-action/issues/95
-        modules: qtconnectivity addons.qtconnectivity
+        modules: qtconnectivity
+        aqtversion: '>=2'
     - name: Build
       env:
         CC:  ${{ matrix.env.cc }}
@@ -281,19 +269,14 @@ jobs:
         version: ${{ matrix.qt }}
         arch: win64_msvc2019_64
         set-env: false
+        aqtversion: '>=2'
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
         version: ${{ matrix.qt }}
-        # We include both here, because Qt 6.2+ currently needs the 'addons' prefix, while
-        # earlier versions don't, and aqtinstall does not currently break on unknown modules.
-        # Note, this 'addons' prefix issue has been fixed already in aqtinstall v2.0, but
-        # install-qt-action is not compatible with aqtinstall v2 untill install-qt-action v3,
-        # which is close, but not yet released. \todo Clean this up when v3 is released.
-        # See https://github.com/miurahr/aqtinstall/issues/333 and
-        # https://github.com/jurplel/install-qt-action/issues/95
-        modules: qtconnectivity addons.qtconnectivity
+        modules: qtconnectivity
         arch: ${{ matrix.qtArch }}
+        aqtversion: '>=2'
     - name: Configure cross-compilation
       if: matrix.arch == 'arm64'
       shell: bash
